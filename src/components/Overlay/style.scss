@@ -1,0 +1,39 @@
+$overlay-color: #f9f7f7 !default;
+$overlay-color-light: #a8a8a8 !default;
+$overlay-opacity: .8 !default;
+
+.overlayComponent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  width: 100vw;
+  height: 100vh;
+  //pointer-events: none;
+  background-color: $overlay-color;
+  opacity: 0;
+  transition-timing-function: ease-out;
+  transition-duration: .3s;
+  transition-property: opacity;
+}
+
+.overlayComponent__higher{
+  z-index: 120;
+}
+
+.overlayComponent__light {
+  background-color: $overlay-color-light;
+}
+
+.overlayComponent__active {
+  pointer-events: all;
+  opacity: $overlay-opacity;
+}
+
+.overlayComponent__transparent {
+  opacity: 0;
+}
+
+
+
+

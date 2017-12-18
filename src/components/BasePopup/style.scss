@@ -1,0 +1,72 @@
+.popup {
+  padding: 24px 24px 16px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 111;
+  transform: translateY(-100%);
+  margin: auto;
+  width: 96vw;
+  max-width: 480px;
+  background: white;
+  opacity: 0;
+  transition: all .2s ease-out;
+  will-change: transform;
+  box-sizing: border-box;
+}
+
+.popup__active {
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
+.popup__higher {
+  z-index: 120;
+}
+
+.popup__small {
+  max-width: 360px
+}
+
+.popup__middle {
+  max-width: 472px;
+  padding: 0;
+}
+
+.popup__large {
+  max-width: 584px;
+}
+
+.popup__extraLarge {
+  max-width: 919px;
+  padding: 0;
+}
+
+.popup__extraLarge.popup__responsive {
+  max-width: 919px;
+  width: 96vw;
+  padding: 0;
+}
+
+//Для маленьких разрешений по высоте либо слишком больших попапов
+.popup__biggerThanWindow {
+  margin: 15px auto;
+  top: 0;
+  position: absolute;
+  transform: translateY(0);
+}
+
+.popup--closeIcon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  right: 30px;
+  top: 28px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.popup--primaryContent {
+  padding: 40px 70px;
+}
