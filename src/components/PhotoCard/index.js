@@ -35,7 +35,7 @@ class PhotoCard extends Component {
 
     render() {
         const {link, id, images} = this.props.photo
-        const {url, width, height} = images.low_resolution
+        const {url} = images.low_resolution
         const _className = classnames('checkTemplate', {
             checkTemplate__animated: this.state.animated
         })
@@ -44,7 +44,7 @@ class PhotoCard extends Component {
         return (
             <div className={_className}>
                 <div className="checkTemplate--inner">
-                    <img src={url} style={{width: `${width}px`, height: `${height}px`}}/>
+                    <img src={url}/>
                     <p>photo id</p>
                     <p>{id}</p>
                     <a href={link}>Переход в Instagramm</a>

@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "autoprefixer": "^7.2.3",
-    "whatwg-fetch": "^2.0.3"
+    "fetch-jsonp": "^1.1.3"
   }
 }
