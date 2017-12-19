@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'
 import './style.scss';
-import Link from "../Link/index";
+import Link from "../Link/index.js";
 
 class PaperTabs extends Component {
 
@@ -38,8 +38,6 @@ class PaperTabs extends Component {
                         const {value, label, count, route} = item;
                         const isChecked = checked === value;
                         const _tabClass = "paperTabs--itemWrap" + (isChecked ? " paperTabs--itemWrap__checked" : "")
-
-                        console.log(checked, value)
 
                         return (
                             <Link key={value}

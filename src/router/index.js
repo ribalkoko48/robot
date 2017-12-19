@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Router, Route, IndexRoute, Redirect, IndexRedirect} from 'react-router'
-import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PASSWORD_SUBROUTE} from '../constants.js'
-import AppContainer from '../containers/AppContainer'
-import ProfileSection from '../containers/ProfileSection'
-import Common from '../containers/ProfileSection/Common'
-import Password from '../containers/ProfileSection/Password'
-import '../../public/style/global-config.scss'
+import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE} from '../constants.js'
+import AppContainer from '../containers/AppContainer/index.js'
+import ProfileSection from '../containers/ProfileSection/index.js'
+import Common from '../containers/ProfileSection/Common/index.js'
+import Photos from '../containers/ProfileSection/Photos/index.js'
 
 
 export default class AppRouter extends Component {
@@ -26,7 +25,7 @@ export default class AppRouter extends Component {
                     <Route path={PROFILE_ROUTE} component={ProfileSection}>
                         <IndexRedirect to={PROFILE_COMMON_SUBROUTE} />
                         <Route path={PROFILE_COMMON_SUBROUTE} component={Common}/>
-                        <Route path={PROFILE_PASSWORD_SUBROUTE} component={Password}/>
+                        <Route path={PROFILE_PHOTOS_SUBROUTE} component={Photos}/>
                     </Route>
                 </Route>
             </Router>

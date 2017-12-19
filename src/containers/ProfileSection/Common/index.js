@@ -1,46 +1,19 @@
 import React, {Component} from 'react'
-import PhotoCard from '../../../components/PhotoCard'
 
-class Common extends Component {
-
-    state = {
-        photos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-    }
-
-    renderTemplates (){
-        let timeout = 0
-        const list = []
-
-        this.state.photos.forEach((id) => {
-
-            timeout += 50
-
-            list.push(
-                <PhotoCard
-                    key={id}
-                    onClick={() => console.log('клик id')}
-                    checked={() => console.log('checkedTempId sssssssdsd')}
-                    timeout={timeout}
-                />
-            )
-        })
-
-        return this.state.photos.length === 0 ? (<div className="templates--emptyText">нет фото</div>) : list
-    }
-
+export default class Common extends Component {
 
     render() {
 
         return (
-            <div style={{
-                display: 'flex',
-                flexWrap: 'wrap'
-            }}>
-                {this.renderTemplates()}
+            <div>
+                <p>Имя: Константин</p>
+                <p>Дата рождения: 20.02.1988</p>
+                <a href="https://github.com/ribalkoko48/robot">
+                    <p>GitHub</p>
+                </a>
+                <img src="https://avatars0.githubusercontent.com/u/20242212?s=460&v=4"/>
             </div>
         )
     }
 
 }
-
-export default Common

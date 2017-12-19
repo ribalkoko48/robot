@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import BreadCrumbs from '../../components/BreadCrumbs'
 import Widget from '../../components/Widget'
-import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PASSWORD_SUBROUTE} from '../../constants'
+import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE} from '../../constants'
 
 class ProfileSection extends Component {
 
@@ -9,18 +9,18 @@ class ProfileSection extends Component {
 
         return [{
             value: PROFILE_COMMON_SUBROUTE,
-            label: 'Профиль организации',
+            label: 'Профиль',
             route: PROFILE_ROUTE + PROFILE_COMMON_SUBROUTE
         }, {
-            value: PROFILE_PASSWORD_SUBROUTE,
-            label: 'Изменениe пароля',
-            route: PROFILE_ROUTE + PROFILE_PASSWORD_SUBROUTE
+            value: PROFILE_PHOTOS_SUBROUTE,
+            label: 'Фото',
+            route: PROFILE_ROUTE + PROFILE_PHOTOS_SUBROUTE
         }]
     }
 
     getCrumbs(){
         return [{
-            label: "Настройки профиля лалал"
+            label: "Robot VERA test"
         }]
     }
 

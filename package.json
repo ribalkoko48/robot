@@ -36,6 +36,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
-    "autoprefixer": "^7.2.3"
+    "autoprefixer": "^7.2.3",
+    "whatwg-fetch": "^2.0.3"
   }
 }
