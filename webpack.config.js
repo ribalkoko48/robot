@@ -3,12 +3,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer')
 
-const BUILD_NAME = './js/build.js';
+const BUILD_NAME = './js/build.min.js';
 
 const config = {
-    entry: {
-        main: './src/app.js'
-    },
+    entry: './src/app.js',
     output: {
         path: path.resolve('./public'),
         filename: BUILD_NAME,
@@ -37,15 +35,13 @@ const config = {
             ]
         },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.HashedModuleIdsPlugin(),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             options: {
-                postcss: [autoprefixer('last 2 versions', 'ie 10')],
-                 sassLoader: {
-                 data: '@import "./public/style/global-config.scss";'
-                 }
+                postcss: [autoprefixer('last 2 versions', 'ie 10')]
             }
         }),
         new HtmlWebpackPlugin({
@@ -62,10 +58,7 @@ config.module.rules.push({
     test: /\.(scss|css)$/,
     exclude: /node_modules/,
     use: ['style-loader', 'css-loader', {
-        loader: 'sass-loader',
-        options: {
-            data: '@import "./public/style/global-config.scss";'
-        }
+        loader: 'sass-loader'
     }]
 })
 

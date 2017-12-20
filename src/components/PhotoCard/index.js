@@ -1,12 +1,17 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import './style.scss'
 
 
 class PhotoCard extends Component {
 
+    static propTypes = {
+        photo: PropTypes.object.isRequired
+    }
+
     state = {
-        animated: false,
+        animated: false
     }
 
     componentDidMount() {
@@ -24,8 +29,6 @@ class PhotoCard extends Component {
         return this._timer && clearTimeout(this._timer)
     }
 
-    onEdit = (e) => this.props.onEdit && this.props.onEdit(e)
-
     animate(timer) {
         this._timer = setTimeout(() => {
             this.setState({animated: true})
@@ -39,7 +42,6 @@ class PhotoCard extends Component {
         const _className = classnames('checkTemplate', {
             checkTemplate__animated: this.state.animated
         })
-
 
         return (
             <div className={_className}>
