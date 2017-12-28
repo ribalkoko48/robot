@@ -4,6 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer')
 
 const BUILD_NAME = './js/build.min.js';
+const NODE_ENV = process.env.NODE_ENV
+
+console.log(NODE_ENV)
 
 const config = {
     entry: './src/app.js',
@@ -35,9 +38,14 @@ const config = {
             ]
         },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        //new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.HashedModuleIdsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(NODE_ENV)
+            }
+        }),
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             options: {

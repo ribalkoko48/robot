@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import BreadCrumbs from '../../components/BreadCrumbs'
 import Widget from '../../components/Widget'
-import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE} from '../../constants'
+import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE, CIRCULAR_DIAGRAM_SUBROUTE} from '../../constants'
 
 class ProfileSection extends Component {
 
@@ -15,7 +15,13 @@ class ProfileSection extends Component {
             value: PROFILE_PHOTOS_SUBROUTE,
             label: 'Фото',
             route: PROFILE_ROUTE + PROFILE_PHOTOS_SUBROUTE
-        }]
+        }, {
+            value: CIRCULAR_DIAGRAM_SUBROUTE,
+            label: 'Круговая диаграмма (аним)',
+            route: PROFILE_ROUTE + CIRCULAR_DIAGRAM_SUBROUTE
+        }
+
+        ]
     }
 
     getCrumbs(){
