@@ -1,3 +1,10 @@
+.canvasDiagram {
+  canvas {
+    transform: rotate(270deg);
+  }
+}
+
+/*
 .columns {
   display: flex;
   align-items: center;
@@ -27,7 +34,7 @@
     position: absolute;
   }
 }
-/* разные цветовые схемы */
+!* разные цветовые схемы *!
 .dial {
   &.error {
     color: #d46d71;
@@ -45,4 +52,4 @@
   &.blue {
     color: #1390d4;
   }
-}
+}*/

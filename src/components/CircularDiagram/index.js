@@ -13,7 +13,6 @@ class CircularDiagram extends Component {
     }
 
     detPercentageArr(){
-
         switch (this.state.percentage){
 
             case 1 : {
@@ -29,9 +28,6 @@ class CircularDiagram extends Component {
                 return [33.33, 33.33, 33.33]
             }
         }
-
-
-        //
     }
 
     render() {

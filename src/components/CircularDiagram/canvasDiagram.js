@@ -8,47 +8,89 @@ class CanvasDiagram extends Component {
         percentage: PropTypes.array.isRequired
     }
 
-    getLine(percentage, lineWidth, width) {
-        if (!this.canvasRed || !this.canvasBlue || !this.canvasYellow) return false
-        console.log(lineWidth)
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.percentage !== this.props.percentage) {
+            this.canvas.getContext("2d").clearRect(0, 0, 88, 88)
+        }
+    }
+
+    /**
+     * конвертирует % в радианы
+     * @param {number} percent
+     * */
+    getPosititon(percent) {
+
+        const factor = Math.PI * 2 / 100
+
+        return percent * factor
+    }
+
+    getColor(position){
+        switch (position){
+            case 0: {
+              return 'red'
+            }
+            case 1: {
+                return 'green'
+            }
+            case 2: {
+                return 'yellow'
+            }
+            case 3: {
+                return 'blue'
+            }
+            default: {
+                return 'black'
+            }
+        }
+    }
+
+    getEndArc(position, arr) {
+        let summ = 0
+
+        arr.forEach((percent, i)=>{
+            if (i < position) summ += percent
+        })
+
+        return summ
+    }
+
+    getLine(percentage) {
         // https://jsfiddle.net/FunnyBanana/3f48mz4L/
-        percentage.forEach((_procent, i) => {
-            let canvas = this.canvasRed
-            let color = 'green'
 
-            if (i === 1) {
-                color = 'red'
-                canvas = this.canvasBlue
-            }
-            if (i === 2) {
-                color = 'yellow'
-                canvas = this.canvasYellow
-            }
+        let canvas = this.canvas
+        let lineStyle = {
+            color: 'gray',
+            lineWidth: 8
+        }
+        let lineWey = {
+            startArc: 0,
+            endArc: Math.PI * 2
+        }
 
-            const procent = (_procent > 0 && _procent < 100) ? Math.round(_procent * 10) / 10 : 0
-            this.drow(canvas, procent, lineWidth - 4, width, color)
+        this.drow(canvas, lineWey, lineStyle)
+
+        percentage.forEach((_procent, i, arr) => {
+            const percentSumm = this.getEndArc(i ,arr)
+
+            lineStyle.color = this.getColor(i)
+            lineStyle.lineWidth = 4
+            lineWey.startArc = this.getPosititon(percentSumm)
+            lineWey.endArc = this.getPosititon(percentSumm + _procent)
+
+            this.drow(canvas, lineWey, lineStyle)
         })
 
     }
 
-    getCircle(lineWidth, width) {
-        const borderColor = 'gray' // тута мы меняем цвет
-
-        if (!this.canvasCir) return false
-        // Выравниваем текст по вертикали
-        const canvas = this.canvasCir
-
-        this.drow(canvas, 99.9, lineWidth, width, borderColor)
-    }
-
-    drow(canvas, _procent, lineWidth, width, color) {
+    drow(canvas, lineWey, lineStyle) {
         const context = canvas.getContext("2d");
-        const procent = (_procent > 0 && _procent < 100) ? Math.round(_procent * 10) / 10 : 0
-        const radian = 2 * Math.PI * procent / 100
-        context.clearRect(0, 0, 88, 88)
+        const {startArc, endArc} = lineWey
+        const {color, lineWidth} = lineStyle
+
         context.beginPath();
-        // рисуем круг с процентами
-        context.arc(width / 2 + lineWidth / 2, width / 2 + lineWidth / 2, width / 2, 1.5 * Math.PI, radian + 1.5 * Math.PI, false);
+
+        context.arc(44, 44, 22, startArc, endArc, false);
         context.lineWidth = lineWidth
         context.strokeStyle = color;
         context.lineCap = "round";
@@ -61,15 +103,11 @@ class CanvasDiagram extends Component {
         const lineWidth = width / 10
         const size = width + lineWidth
         const styleObj = {"width": size + 'px', "height": size + 'px', "fontSize": Math.floor((width - lineWidth) / 4) + 'px'}
-        this.getLine(percentage, lineWidth, width)
-        this.getCircle(lineWidth, width)
+        setTimeout(() => this.getLine(percentage, lineWidth, width), 0)
 
         return (
-            <div style={styleObj}>
-                <canvas ref={(can) => this.canvasCir = can} width={88} height={88} />
-                <canvas ref={(can) => this.canvasRed = can} width={88} height={88} />
-                <canvas ref={(can) => this.canvasBlue = can} width={88} height={88} />
-                <canvas ref={(can) => this.canvasYellow = can} width={88} height={88} />
+            <div className="canvasDiagram" style={styleObj}>
+                <canvas ref={(can) => this.canvas = can} width={88} height={88} />
             </div>
         )
     }
