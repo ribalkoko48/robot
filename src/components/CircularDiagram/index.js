@@ -9,7 +9,7 @@ class CircularDiagram extends Component {
     static propTypes = {}
 
     state = {
-        percentage: 0
+        percentage: 1
     }
 
     detPercentageArr() {
@@ -21,7 +21,7 @@ class CircularDiagram extends Component {
             }
             case 2 :
             {
-                return [{active: true, value: 100, color: 'green'}, {active: false, value: 200, color: 'pink'}, {active: false, value: 700, color: 'red'}]
+                return [{active: true, value: 98, color: '#f8c51c'}, {active: false, value: 1, color: '#f01526'}, {active: false, value: 1, color: '#7ed321'}]
             }
             case 3 :
             {
