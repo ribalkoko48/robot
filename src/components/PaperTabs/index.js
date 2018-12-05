@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames'
+import {PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE} from '../../constants'
 import './style.scss';
 import Link from "../Link/index.js";
 
@@ -19,7 +20,16 @@ class PaperTabs extends Component {
     };
 
     static defaultProps = {
-        theme: 'inSection'
+        theme: 'inSection',
+        tabs: [{
+            value: PROFILE_COMMON_SUBROUTE,
+            label: 'Профиль',
+            route: PROFILE_COMMON_SUBROUTE
+        }, {
+            value: PROFILE_PHOTOS_SUBROUTE,
+            label: 'Фото',
+            route: PROFILE_PHOTOS_SUBROUTE
+        }]
     }
 
     onClick = (value) => () => {

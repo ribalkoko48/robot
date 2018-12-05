@@ -1,40 +1,36 @@
-import React, {Component} from 'react';
-import BreadCrumbs from '../../components/BreadCrumbs'
-import Widget from '../../components/Widget'
-import {PROFILE_ROUTE, PROFILE_COMMON_SUBROUTE, PROFILE_PHOTOS_SUBROUTE} from '../../constants'
+import React, {PureComponent} from 'react';
+import Photos from './Photos'
+import Common from './Common'
+import PaperTabs from "../../components/PaperTabs/index";
+import './style.scss'
 
-class ProfileSection extends Component {
+class ProfileSection extends PureComponent {
 
-    getTabs() {
-
-        return [{
-            value: PROFILE_COMMON_SUBROUTE,
-            label: 'Профиль',
-            route: PROFILE_ROUTE + PROFILE_COMMON_SUBROUTE
-        }, {
-            value: PROFILE_PHOTOS_SUBROUTE,
-            label: 'Фото',
-            route: PROFILE_ROUTE + PROFILE_PHOTOS_SUBROUTE
-        }]
+    state = {
+        href: '/common'
     }
 
-    getCrumbs(){
-        return [{
-            label: "Robot VERA test"
-        }]
+    setHref = (value) => {
+        this.setState({
+            href: value
+        })
     }
+
 
     render() {
-        const {children, router} = this.props
-        const selectedTab = router.routes[2].path
+        const {href} = this.state
 
         return (
-            <div>
-                <BreadCrumbs source={this.getCrumbs()} />
-                <Widget tabs={this.getTabs()}
-                        selectedTab={selectedTab} >
-                    {children}
-                </Widget>
+            <div className="widget">
+                <PaperTabs theme="inWidget"
+                           checked={href}
+                           onChange={this.setHref}
+                />
+                <div className="widget--content">
+                    {href === '/photos'
+                        ? <Photos />
+                        : <Common />
+                    }</div>
             </div>
         )
     }

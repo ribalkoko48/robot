@@ -1,65 +1,43 @@
-const webpack = require("webpack");
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer')
+const webpack = require('webpack');
 
-const BUILD_NAME = './js/build.min.js';
-
-const config = {
-    entry: './src/app.js',
-    output: {
-        path: path.resolve('./public'),
-        filename: BUILD_NAME,
-        publicPath: '/'
-    },
-    devtool: 'source-map',
-    watchOptions: { //задержка реакции чтобы исключить баги при задержке индексации файлов
-        aggregateTimeout: 200
+module.exports = {
+    entry: './src/index.js',
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: "style-loader" // creates style nodes from JS strings
+                    },
+                    {
+                        loader: "css-loader" // translates CSS into CommonJS
+                    },
+                    {
+                        loader: "sass-loader" // compiles Sass to CSS
+                    }
+                ]
+            }
+        ]
     },
     resolve: {
-        modules: ['node_modules', 'src', 'src/style'], // Директории в которых будут скать скрипты если не указан путь
-        extensions: ['.js', '.scss', '.css'], // разширения которые можно не дописывать при импорте
+        extensions: ['*', '.js', '.jsx']
     },
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    use: ['babel-loader']
-                },
-                {
-                    test: /\.(gif|png|ttf|svg|woff|eot)$/,
-                    exclude: /node_modules/,
-                    use: ['file-loader']
-                }
-            ]
-        },
+    output: {
+        path: __dirname + '/src',
+        publicPath: '/',
+        filename: 'bundle.js'
+    },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.HashedModuleIdsPlugin(),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true,
-            options: {
-                postcss: [autoprefixer('last 2 versions', 'ie 10')]
-            }
-        }),
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'src/templates/dev_index.ejs',
-            build: BUILD_NAME,
-            inject: false,
-            hash: true
-        })
-    ]
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        contentBase: './src',
+        hot: true
+    }
 };
-
-config.module.rules.push({
-    test: /\.(scss|css)$/,
-    exclude: /node_modules/,
-    use: ['style-loader', 'css-loader', {
-        loader: 'sass-loader'
-    }]
-})
-
-module.exports = config;
